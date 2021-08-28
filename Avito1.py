@@ -32,8 +32,8 @@ async def get_matrix(url: str):
         async with session.get(url) as response:
             print("Status:", response.status)
             data = await response.text()
-            numbers = re.findall(r'[-+]?\d+', data)
-            output = calculating(numbers)
+            numbers = re.findall(r'[-+]?\d+', data) # Создаем список чисел
+            output = calculating(numbers) # Сортируем по спирали
             return output
 
 SOURCE_URL = 'https://raw.githubusercontent.com/avito-tech/python-trainee-assignment/main/matrix.txt'
@@ -46,6 +46,7 @@ TRAVERSAL = [
 
 loop = asyncio.get_event_loop()
 def test_get_matrix():
-    assert loop.run_until_complete(get_matrix(SOURCE_URL)) == TRAVERSAL
+    assert loop.run_until_complete(get_matrix(SOURCE_URL)) == TRAVERSAL # Не вышло с asyncio.run,
+                                                                        # только с loop.run_until_complete
 
 test_get_matrix()
